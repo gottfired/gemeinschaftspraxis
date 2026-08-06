@@ -1,0 +1,40 @@
+{
+  "practice": {
+    "name": "Praxis am Mühlbach",
+    "tagline": "Gemeinschaftspraxis",
+    "logo": "logo.png",
+    "intro": "Herzlich willkommen! Entdecken Sie die Ordinationen unserer Gemeinschaftspraxis – erfahrene Behandlerinnen mit individuellen Schwerpunkten, ganzheitlich an Ihrer Seite."
+  },
+  "therapists": [
+    {
+      "logo": "logos/tcm-chen-logo.png",
+      "page-title": "TCM Chen",
+      "page-subtitle": "Praxis für Chinesische Medizin",
+      "practitioner-name": "Dr. med. univ. Heidrun Chen",
+      "practitioner-portrait": "portrait-dr-heidrun-chen.jpg",
+      "subtitle": "Traditionelle Chinesische Medizin",
+      "text": "Ärztin für Allgemeinmedizin mit jahrzehntelanger Erfahrung in Akupunktur, chinesischer Arzneimitteltherapie und ganzheitlicher Diagnostik – Traditionelle Chinesische Medizin kombiniert mit westlicher Medizin.",
+      "url": "https://tcm-chen.at"
+    },
+    {
+      "logo": "logos/drschoendorfer-logo.svg",
+      "page-title": "Dr. Yasmin Schöndorfer",
+      "page-subtitle": "TCM – Frauengesundheit",
+      "practitioner-name": "Dr. Yasmin Schöndorfer",
+      "practitioner-portrait": "portait-dr-yasmin-schondorfer.jpg",
+      "subtitle": "TCM & Frauengesundheit",
+      "text": "Ganzheitliche Frauengesundheit mit Traditioneller Chinesischer Medizin und westlicher Medizin: Kinderwunsch, IVF-Begleitung, Zyklusbeschwerden, Schwangerschaft und Menopause.",
+      "url": "https://drschoendorfer.at"
+    },
+    {
+      "logo": "logos/schmoelzer-logo.jpg",
+      "page-title": "Psychotherapie Schmölzer",
+      "page-subtitle": "Personzentrierte Psychotherapie",
+      "practitioner-name": "Dr. med. univ. Nina Schmölzer",
+      "practitioner-portrait": "portrait-dr-nina-schmoelzer.jpg",
+      "subtitle": "Psychotherapie & Allgemeinmedizin",
+      "text": "Personzentrierte Psychotherapie nach Carl R. Rogers – humanistisch und einfühlsam. Psychotherapeutin und Ärztin für Allgemeinmedizin mit langjähriger psychiatrischer Erfahrung. Auch online oder in Bewegung an der frischen Luft möglich.",
+      "url": "https://www.praxis-ninaschmoelzer.at"
+    }
+  ]
+}
