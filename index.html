@@ -68,7 +68,14 @@
     document.getElementById('footer-name').textContent = p.name || 'Praxis am Mühlbach';
     const footerLinks = document.getElementById('footer-links');
     footerLinks.innerHTML = '';
-    (data.therapists || []).forEach((t) => {
+    (data.therapists || []).forEach((t, i) => {
+      if (i > 0) {
+        const sep = document.createElement('span');
+        sep.className = 'sep';
+        sep.textContent = ' · ';
+        sep.setAttribute('aria-hidden', 'true');
+        footerLinks.appendChild(sep);
+      }
       const a = document.createElement('a');
       a.href = t.url;
       a.target = '_blank';

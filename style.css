@@ -70,7 +70,7 @@ body {
   box-shadow: var(--shadow);
   transition: transform .5s cubic-bezier(.2,.7,.3,1.2);
 }
-.hero .logo-ring:hover { transform: translateY(-4px) scale(1.02); }
+/* Logo ist nicht klickbar – kein Hover-Zoom */
 .hero .logo-ring img {
   display: block;
   width: min(78vw, 420px);
@@ -268,7 +268,7 @@ footer .ornament { color: var(--gold); letter-spacing: 6px; margin-bottom: 10px;
 footer .practice-name { font-size: 0.9rem; color: var(--green-mid); margin-bottom: 6px; }
 footer .links a { color: var(--green-mid); text-decoration: none; }
 footer .links a:hover { text-decoration: underline; }
-footer .links a + a::before { content: " · "; color: var(--gold); }
+footer .links .sep { color: var(--gold); }
 
 .loading-note {
   grid-column: 1 / -1;
