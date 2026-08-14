@@ -5,8 +5,15 @@
     "logo": "logo.png",
     "intro": "Herzlich willkommen! Entdecken Sie die Ordinationen unserer Gemeinschaftspraxis – erfahrene Behandlerinnen mit individuellen Schwerpunkten, ganzheitlich an Ihrer Seite."
   },
+  "sections": [
+    { "id": "aerztinnen", "title": "Ärztinnen", "file": "aerztinnen.html" },
+    { "id": "psychotherapie", "title": "Psychotherapie", "file": "psychotherapie.html" },
+    { "id": "klinische-psychologie", "title": "Klinische Psychologie", "file": "klinische-psychologie.html" },
+    { "id": "gruppenkurse", "title": "Gruppenkurse", "file": "gruppenkurse.html" }
+  ],
   "therapists": [
     {
+      "section": "aerztinnen",
       "logo": "logos/tcm-chen-logo.png",
       "page-title": "TCM Chen",
       "page-subtitle": "Praxis für Chinesische Medizin",
@@ -17,6 +24,7 @@
       "url": "https://tcm-chen.at"
     },
     {
+      "section": "aerztinnen",
       "logo": "logos/drschoendorfer-logo.svg",
       "page-title": "Dr. Yasmin Schöndorfer",
       "page-subtitle": "TCM – Frauengesundheit",
@@ -27,6 +35,7 @@
       "url": "https://drschoendorfer.at"
     },
     {
+      "section": "psychotherapie",
       "logo": "logos/schmoelzer-logo.jpg",
       "page-title": "Psychotherapie Schmölzer",
       "page-subtitle": "Personzentrierte Psychotherapie",
@@ -37,9 +46,10 @@
       "url": "https://www.praxis-ninaschmoelzer.at"
     },
     {
+      "section": "psychotherapie",
       "logo": "",
       "page-title": "Claudia Matzka",
-      "page-subtitle": "Psychotherapie", 
+      "page-subtitle": "Psychotherapie",
       "practitioner-name": "Mag. Claudia Matzka",
       "practitioner-portrait": "portrait-claudia-matzka.jpg",
       "subtitle": "Klinische Psychologin, Gesundheitspsychologin, Psychotherapeutin (Existenzanalyse), Kinder, Jugendliche, Erwachsene",
@@ -47,6 +57,7 @@
       "url": ""
     },
     {
+      "section": "klinische-psychologie",
       "logo": "logos/kerstin-rojko-vetter-logo.png",
       "page-title": "Kerstin Rojko-Vetter",
       "page-subtitle": "Klinische Psychologin",
@@ -57,6 +68,7 @@
       "url": "https://www.erlebnis-geburt.at"
     },
     {
+      "section": "klinische-psychologie",
       "logo": "logos/zoechling-logo.png",
       "page-title": "Petra Zöchling",
       "page-subtitle": "Klinische- und Gesundheitspsychologin",
@@ -67,6 +79,7 @@
       "url": "https://www.psychologie-zoechling.at"
     },
     {
+      "section": "gruppenkurse",
       "logo": "",
       "page-title": "Andrea Hofmann",
       "page-subtitle": "Qi Gong & Yoga",

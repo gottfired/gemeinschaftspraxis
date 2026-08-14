@@ -52,10 +52,9 @@ body {
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: clamp(64px, 9vw, 110px) 24px 40px;
-  animation: fadeDown 1s ease both;
+  padding: clamp(64px, 9vw, 110px) 24px 0;
 }
-@keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
+/* Kein Einblenden des Hero – sonst animiert der obere Teil bei jedem Seitenwechsel erneut */
 
 .hero .logo-ring {
   /* Block statt inline-block: so bleibt der Titel darunter zentriert,
@@ -119,8 +118,10 @@ body {
 /* ---------- Cards ---------- */
 .cards {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: clamp(28px, 4vw, 56px);
   max-width: 1240px;
   margin: 0 auto;
@@ -132,6 +133,10 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Schrumpfen statt sofort umbrechen: 2-3 Karten bleiben nebeneinander */
+  flex: 1 1 320px;
+  min-width: 240px;
+  max-width: 480px;
   background: var(--beige-soft);
   border: 1px solid var(--line);
   border-radius: 32px;
@@ -264,6 +269,143 @@ body {
 }
 .card:hover .cta svg { transform: translateX(4px); }
 
+/* ---------- Sektions-Navigation ---------- */
+.section-nav-wrap { width: 100%; }
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 34px;
+}
+.section-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(252, 251, 249, 0.75);
+  color: var(--green-mid);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all .3s ease;
+}
+.section-nav a:hover {
+  border-color: var(--gold);
+  color: var(--green-deep);
+  transform: translateY(-2px);
+}
+.section-nav a.active {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: #fff;
+}
+.section-nav a.active:hover { color: #fff; }
+
+/* ---------- Sektions-Übersicht (Startseite) ---------- */
+.card.section-card { justify-content: flex-start; }
+.card.section-card h2 { margin-bottom: 10px; }
+.card.section-card .section-description,
+.card.section-card .section-names { flex: none; }
+.card.section-card .section-description {
+  color: var(--ink-soft);
+  font-weight: 300;
+  font-size: 0.95rem;
+}
+.card.section-card .section-names {
+  color: var(--ink-soft);
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+.card.section-card .cta { margin-top: auto; }
+
+/* ---------- Burger-Menü (mobil) ---------- */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(252, 251, 249, 0.92);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--green-deep);
+  transition: transform .3s ease, opacity .3s ease;
+}
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: flex; }
+  /* Wrapper = Dim-Schicht + Clipping: liegt über dem Seiteninhalt (.page, z-Index 1),
+     aber unter dem Burger-Button (z-Index 100). Das Panel liegt im Wrapper über der Dim. */
+  .section-nav-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    overflow: hidden;
+    background: rgba(34, 48, 43, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .35s ease, visibility 0s linear .35s;
+  }
+  .section-nav-wrap.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity .35s ease, visibility 0s;
+  }
+  .section-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 85vw);
+    margin-top: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 88px 20px 28px;
+    background: var(--beige-soft);
+    border-left: 1px solid var(--line);
+    box-shadow: -20px 0 50px rgba(34, 48, 43, 0.18);
+    transform: translateX(100%);
+    transition: transform .35s ease;
+    pointer-events: auto;
+  }
+  .section-nav-wrap.open .section-nav { transform: translateX(0); }
+  .section-nav a {
+    justify-content: flex-start;
+    padding: 13px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    background: transparent;
+  }
+  .section-nav a:hover { transform: none; }
+  .section-nav a.active { border-color: var(--green-deep); }
+}
+
 /* ---------- Footer ---------- */
 footer {
   text-align: center;
@@ -279,7 +421,7 @@ footer .links a:hover { text-decoration: underline; }
 footer .links .sep { color: var(--gold); }
 
 .loading-note {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
   text-align: center;
   color: var(--ink-soft);
   padding: 60px 20px;
