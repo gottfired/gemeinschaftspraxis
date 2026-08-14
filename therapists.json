@@ -10,21 +10,11 @@
       "logo": "logos/tcm-chen-logo.png",
       "page-title": "TCM Chen",
       "page-subtitle": "Praxis für Chinesische Medizin",
-      "practitioner-name": "Dr. med. univ. Heidrun Chen",
+      "practitioner-name": "Dr. Heidrun Chen",
       "practitioner-portrait": "portrait-heidrun-chen.jpg",
       "subtitle": "Traditionelle Chinesische Medizin",
       "text": "Ärztin für Allgemeinmedizin mit jahrzehntelanger Erfahrung in Akupunktur, chinesischer Arzneimitteltherapie und ganzheitlicher Diagnostik – Traditionelle Chinesische Medizin kombiniert mit westlicher Medizin.",
       "url": "https://tcm-chen.at"
-    },
-    {
-      "logo": "logos/schmoelzer-logo.jpg",
-      "page-title": "Psychotherapie Schmölzer",
-      "page-subtitle": "Personzentrierte Psychotherapie",
-      "practitioner-name": "Dr. med. univ. Nina Schmölzer",
-      "practitioner-portrait": "portrait-nina-schmoelzer.jpg",
-      "subtitle": "Psychotherapie & Allgemeinmedizin",
-      "text": "Personzentrierte Psychotherapie nach Carl R. Rogers – humanistisch und einfühlsam. Psychotherapeutin und Ärztin für Allgemeinmedizin mit langjähriger psychiatrischer Erfahrung. Auch online oder in Bewegung an der frischen Luft möglich.",
-      "url": "https://www.praxis-ninaschmoelzer.at"
     },
     {
       "logo": "logos/drschoendorfer-logo.svg",
@@ -35,6 +25,26 @@
       "subtitle": "TCM & Frauengesundheit",
       "text": "Ganzheitliche Frauengesundheit mit Traditioneller Chinesischer Medizin und westlicher Medizin: Kinderwunsch, IVF-Begleitung, Zyklusbeschwerden, Schwangerschaft und Menopause.",
       "url": "https://drschoendorfer.at"
+    },
+    {
+      "logo": "logos/schmoelzer-logo.jpg",
+      "page-title": "Psychotherapie Schmölzer",
+      "page-subtitle": "Personzentrierte Psychotherapie",
+      "practitioner-name": "Dr. Nina Schmölzer",
+      "practitioner-portrait": "portrait-nina-schmoelzer.jpg",
+      "subtitle": "Personzentrierte Psychotherapie, humanistisch, nach Carl R. Rogers ",
+      "text": "Personzentrierte Psychotherapie nach Carl R. Rogers – humanistisch und einfühlsam. Psychotherapeutin und Ärztin für Allgemeinmedizin mit langjähriger psychiatrischer Erfahrung. Auch online oder in Bewegung an der frischen Luft möglich.",
+      "url": "https://www.praxis-ninaschmoelzer.at"
+    },
+    {
+      "logo": "",
+      "page-title": "Claudia Matzka",
+      "page-subtitle": "Psychotherapie", 
+      "practitioner-name": "Mag. Claudia Matzka",
+      "practitioner-portrait": "portrait-claudia-matzka.jpg",
+      "subtitle": "Klinische Psychologin, Gesundheitspsychologin, Psychotherapeutin (Existenzanalyse), Kinder, Jugendliche, Erwachsene",
+      "text": "Schwerpunkte: Kinderpsychosomatik allgemein, Essstörungen, Schwerpunkt Anorexie, Jugendliche Krisen, Depressionen, Angststörungen, Pubertäre Krisen, Eltern- und Familiengespräche Psychosomatik im Erwachsenenalter Erwachsene nach ICD-11-Kriterien Psychoonkologie Zusammenarbeit im Geundheitsbereich Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor",
+      "url": ""
     },
     {
       "logo": "logos/kerstin-rojko-vetter-logo.png",
@@ -52,16 +62,16 @@
       "page-subtitle": "Klinische- und Gesundheitspsychologin",
       "practitioner-name": "Mag. Petra Zöchling",
       "practitioner-portrait": "portrait-petra-zoechling.jpg",
-      "subtitle": "Klinische & Gesundheitspsychologie",
+      "subtitle": "Klinische & Gesundheitspsychologie, Klinisch-Psychologische Diagnostik",
       "text": "Klinische und gesundheitspsychologische Beratung und Behandlung bei psychologischen Fragestellungen – von Krisenbewältigung bis zur aktiven Reflexion der momentanen Lebenssituation, mit Begegnung auf Augenhöhe, Empathie und Wertschätzung.",
       "url": "https://www.psychologie-zoechling.at"
     },
     {
-      "logo": "logos/joando-logo.png",
+      "logo": "",
       "page-title": "Andrea Hofmann",
       "page-subtitle": "Qi Gong & Yoga",
       "practitioner-name": "Andrea Hofmann",
-      "practitioner-portrait": "portrait-andrea-hofmann.png",
+      "practitioner-portrait": "portrait-andrea-hofmann.jpg",
       "subtitle": "Qi Gong & Meridian Yoga",
       "text": "Wudang Qi Gong und Meridian Yoga (Makko-Ho nach Shizuto Masunaga) – sanftes Entspannungstraining für Gesundheit, Beweglichkeit und den Fluss der Meridian-Energie. Die Übungen sind für jeden geeignet und werden mit Aufwärmübungen, Mobilisation der Gelenke und einer abschließenden Meditation abgerundet. Jeden Donnerstag in Baden bei Wien.",
       "url": "https://www.joando.at/ENSTSPANNUNG/"

@@ -22,7 +22,7 @@
 <div class="page">
   <header class="hero">
     <div class="logo-ring">
-      <img id="practice-logo" src="logo.png" alt="Logo der Praxis am Mühlbach" decoding="async">
+      <img id="practice-logo" src="logo.jpg" alt="Logo der Praxis am Mühlbach" decoding="async">
     </div>
     <div class="eyebrow" id="practice-tagline">Gemeinschaftspraxis</div>
     <h1 id="practice-title">Praxis am Mühlbach</h1>
@@ -68,7 +68,7 @@
     document.getElementById('footer-name').textContent = p.name || 'Praxis am Mühlbach';
     const footerLinks = document.getElementById('footer-links');
     footerLinks.innerHTML = '';
-    (data.therapists || []).forEach((t, i) => {
+    (data.therapists || []).filter((t) => (t.url || '').trim()).forEach((t, i) => {
       if (i > 0) {
         const sep = document.createElement('span');
         sep.className = 'sep';
@@ -87,11 +87,15 @@
     // Cards
     cardsContainer.innerHTML = '';
     (data.therapists || []).forEach((t) => {
-      const card = document.createElement('a');
-      card.className = 'card';
-      card.href = t.url;
-      card.target = '_blank';
-      card.rel = 'noopener';
+      const url = (t.url || '').trim();
+      const hasUrl = url.length > 0;
+      const card = document.createElement(hasUrl ? 'a' : 'div');
+      card.className = hasUrl ? 'card' : 'card no-link';
+      if (hasUrl) {
+        card.href = url;
+        card.target = '_blank';
+        card.rel = 'noopener';
+      }
 
       card.innerHTML = `
         <div class="photo">
@@ -100,7 +104,7 @@
         </div>
         <div class="body">
           <div class="site-logo">
-            <img class="icon" src="${escapeHtml(t.logo)}" alt="Logo ${escapeHtml(t['page-title'])}">
+            ${t.logo ? `<img class="icon" src="${escapeHtml(t.logo)}" alt="Logo ${escapeHtml(t['page-title'])}">` : ''}
             <div class="site-text">
               <strong>${escapeHtml(t['page-title'])}</strong>
               <span>${escapeHtml(t['page-subtitle'])}</span>
@@ -109,9 +113,9 @@
           <h2>${escapeHtml(t['practitioner-name'])}</h2>
           <div class="role">${escapeHtml(t.subtitle)}</div>
           <p>${escapeHtml(t.text)}</p>
-          <span class="cta">Zur Webseite
+          ${hasUrl ? `<span class="cta">Zur Webseite
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-          </span>
+          </span>` : ''}
         </div>`;
 
       cardsContainer.appendChild(card);
