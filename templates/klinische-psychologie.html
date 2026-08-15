@@ -1,0 +1,59 @@
+<!--
+  TEMPLATE – processed by build.js into a finished page (npm run build).
+  Edit this page's structure here; content (texts, cards, contacts) comes from
+  therapists.json. The BUILD markers in this file are replaced with the generated
+  content at build time – do not fill them in by hand.
+-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><!-- BUILD:document-title --></title>
+<meta name="description" content="Klinische Psychologie in der Praxis am Mühlbach – lernen Sie unser Team und die Angebote kennen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-section="klinische-psychologie">
+
+<div class="deco" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <svg class="leaf leaf-1" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C28 22 20 45 28 68c8 21 30 30 22 30C24 95 8 70 10 40 12 15 32 3 50 5z"/><path d="M54 3c22 10 34 30 33 52-1 20-12 38-27 44 16-14 22-38 14-62C68 14 60 7 54 3z"/></svg>
+  <svg class="leaf leaf-2" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C28 22 20 45 28 68c8 21 30 30 22 30C24 95 8 70 10 40 12 15 32 3 50 5z"/><path d="M54 3c22 10 34 30 33 52-1 20-12 38-27 44 16-14 22-38 14-62C68 14 60 7 54 3z"/></svg>
+</div>
+
+<div class="page">
+  <header class="hero">
+    <a class="logo-ring" href="index.html" aria-label="Zur Startseite der Praxis am Mühlbach">
+      <img id="practice-logo" src="<!-- BUILD:logo-src -->" alt="<!-- BUILD:logo-alt -->" decoding="async">
+    </a>
+    <div class="eyebrow" id="practice-tagline"><!-- BUILD:tagline --></div>
+    <h1 id="practice-title"><!-- BUILD:h1 --></h1>
+    <p class="sub" id="practice-intro"><!-- BUILD:intro --></p>
+  </header>
+
+  <div class="section-nav-wrap">
+    <nav class="section-nav" id="section-nav" aria-label="Bereiche der Praxis"><!-- BUILD:nav --></nav>
+  </div>
+
+  <main class="cards" id="cards">
+    <!-- BUILD:cards -->
+  </main>
+
+  <footer>
+    <div class="ornament">✦ ✦ ✦</div>
+    <div class="practice-name" id="footer-name"><!-- BUILD:footer-name --></div>
+    <div class="links" id="footer-links"><!-- BUILD:footer-links --></div>
+    <div class="meta-links">
+      <a href="impressum.html">Impressum</a>
+    </div>
+  </footer>
+</div>
+
+
+</body>
+</html>

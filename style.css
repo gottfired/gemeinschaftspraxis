@@ -1,29 +1,43 @@
+/* ============================================================================
+   Praxis am Mühlbach – global stylesheet
+   ----------------------------------------------------------------------------
+   Shared styles for all pages of the site. The HTML pages are generated from
+   templates/ by build.js (`npm run build`) – the page structure lives in the
+   templates, the visual design lives in this file.
+   ========================================================================== */
+
+/* ---------- Design tokens (CSS custom properties) ---------- */
 :root {
-  /* Farben */
-  --beige: #f5f2ed;
-  --beige-soft: #fcfbf9;
-  --ink: #22302b;
-  --ink-soft: #5e6d68;
-  --green-deep: #2a443b;
-  --green-mid: #446458;
-  --gold: #b89d67;
-  --gold-deep: #8a6d3a;
-  --line: rgba(42, 68, 59, 0.14);
-  --shadow: 0 30px 60px -25px rgba(34, 48, 43, 0.28);
-  --shadow-hover: 0 45px 90px -30px rgba(34, 48, 43, 0.38);
+  /* Brand palette */
+  --beige: #f5f2ed;             /* page background */
+  --beige-soft: #fcfbf9;        /* panel background (cards, topics, map, legal) */
+  --ink: #22302b;               /* main text color */
+  --ink-soft: #5e6d68;          /* secondary / muted text */
+  --green-deep: #2a443b;        /* headings, active nav state, buttons */
+  --green-mid: #446458;         /* accent green (nav links, tagline) */
+  --gold: #b89d67;              /* highlight accent (borders, ornaments) */
+  --gold-deep: #8a6d3a;         /* uppercase labels (card role) */
+  --line: rgba(42, 68, 59, 0.14); /* hairline borders and dividers */
 
-  /* Schriften */
-  --sans: 'Inter', sans-serif;
-  --serif: 'Cormorant Garamond', serif;
+  /* Shadows */
+  --shadow: 0 30px 60px -25px rgba(34, 48, 43, 0.28);       /* resting panels */
+  --shadow-hover: 0 45px 90px -30px rgba(34, 48, 43, 0.38); /* hovered panels */
 
-  /* Panel-Optik (Karten, Themen, Kartenbox, Legal) */
+  /* Fonts */
+  --sans: 'Inter', sans-serif;            /* body text */
+  --serif: 'Cormorant Garamond', serif;   /* headings / display text */
+
+  /* Shared panel look (cards, topics, map, legal card) */
   --panel-bg: var(--beige-soft);
   --panel-border: 1px solid var(--line);
   --panel-shadow: var(--shadow);
 }
 
+/* ---------- Reset & base ---------- */
+/* Reset default margins/padding and use border-box sizing everywhere */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Smooth scrolling for in-page anchors (e.g. #datenschutz on the legal page) */
 html { scroll-behavior: smooth; }
 
 body {
@@ -32,10 +46,13 @@ body {
   color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: hidden; /* decorative blobs reach beyond the viewport – no horizontal scroll */
 }
 
 /* ---------- Decorative background ---------- */
+/* Fixed full-screen layer behind all content (z-index 0), purely visual:
+   two soft blurred color blobs and two leaf shapes. pointer-events: none
+   ensures it never intercepts clicks. */
 .deco {
   position: fixed;
   inset: 0;
@@ -48,8 +65,8 @@ body {
   filter: blur(60px);
   opacity: 0.5;
 }
-.deco .blob-1 { width: 520px; height: 520px; background: #dbe6dd; top: -160px; left: -140px; }
-.deco .blob-2 { width: 460px; height: 460px; background: #eee6d6; bottom: -140px; right: -120px; }
+.deco .blob-1 { width: 520px; height: 520px; background: #dbe6dd; top: -160px; left: -140px; }  /* soft green, top left */
+.deco .blob-2 { width: 460px; height: 460px; background: #eee6d6; bottom: -140px; right: -120px; } /* soft gold, bottom right */
 .deco .leaf {
   position: absolute;
   color: var(--green-mid);
@@ -58,21 +75,23 @@ body {
 .deco .leaf-1 { top: 12%; left: 4%; transform: rotate(18deg); width: 120px; }
 .deco .leaf-2 { bottom: 14%; right: 5%; transform: rotate(-24deg) scaleX(-1); width: 150px; }
 
+/* Content layer: sits above the decorative background, fills the viewport height */
 .page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
 
 /* ---------- Hero ---------- */
-/* Kein Einblenden des Hero – sonst animiert der obere Teil bei jedem Seitenwechsel erneut */
+/* No hero fade-in – otherwise the top animates again on every page change */
 .hero {
   text-align: center;
   padding: clamp(64px, 9vw, 110px) 24px 0;
 }
 
+/* Logo in a rounded, softly shadowed "ring" */
 .hero .logo-ring {
   display: block;
   width: fit-content;
-  max-width: 100%; /* Auf schmalen Viewports nicht überlaufen, damit das Logo zentriert bleibt */
+  max-width: 100%; /* Don't overflow on narrow viewports so the logo stays centered */
   margin: 0 auto 34px;
-  background: #f9f9f5; /* Farbton des Logos (leicht dunkler als #fff) */
+  background: #f9f9f5; /* Logo hue (slightly darker than #fff) */
   border: 1px solid rgba(42, 68, 59, 0.12);
   border-radius: 28px;
   padding: clamp(18px, 3.5vw, 34px) clamp(28px, 5vw, 56px);
@@ -85,6 +104,7 @@ body {
   height: auto;
 }
 
+/* Small uppercase label ("Gemeinschaftspraxis") with gold flanking lines */
 .hero .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -104,6 +124,7 @@ body {
 }
 .hero .eyebrow::after { background: linear-gradient(90deg, var(--gold), transparent); }
 
+/* Main headline (serif, large, fluid size) */
 .hero h1 {
   font-family: var(--serif);
   font-weight: 600;
@@ -122,7 +143,8 @@ body {
   font-weight: 300;
 }
 
-/* ---------- Panels (Karten, Themen, Kartenbox, Legal) ---------- */
+/* ---------- Panels (cards, topics, card box, legal) ---------- */
+/* Shared surface look for all card-like boxes on the page */
 .card,
 .topics a,
 .map-info,
@@ -134,6 +156,7 @@ body {
 }
 
 /* ---------- Cards ---------- */
+/* Section pages: flexible row of therapist cards, wrapped, centered */
 .cards {
   flex: 1;
   display: flex;
@@ -151,7 +174,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Schrumpfen statt sofort umbrechen: 2-3 Karten bleiben nebeneinander */
+  /* Shrink instead of wrapping immediately: 2-3 cards stay side by side */
   flex: 1 1 320px;
   min-width: 240px;
   max-width: 480px;
@@ -160,7 +183,7 @@ body {
   text-decoration: none;
   color: inherit;
   transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease;
-  animation: rise .9s ease both;
+  animation: rise .9s ease both; /* entrance animation, staggered below */
   --accent: var(--gold);
 }
 .card:nth-child(1) { animation-delay: .1s; }
@@ -169,14 +192,17 @@ body {
 .card:nth-child(4) { animation-delay: .4s; }
 @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 
+/* Hover: card lifts up and casts a deeper shadow */
 .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
 
-/* Karte ohne URL: nicht klickbar, keine Hover-Effekte */
+/* Card without URL: not clickable, no hover effects */
 .card.no-link:hover { transform: none; box-shadow: var(--shadow); }
 .card.no-link:hover .photo img { transform: none; }
 .card.no-link:hover .photo .accent { width: 90px; }
 
 /* photo */
+/* Square portrait with a subtle dark gradient at the bottom for depth;
+   image zooms slightly on hover. */
 .card .photo {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -196,6 +222,7 @@ body {
 }
 .card:hover .photo img { transform: scale(1.06); }
 
+/* Gold accent bar at the bottom edge of the photo, widens on hover */
 .card .photo .accent {
   position: absolute;
   left: 22px; bottom: -1px;
@@ -211,6 +238,7 @@ body {
 .card .body { display: flex; flex-direction: column; padding: 30px 30px 34px; flex: 1; }
 
 /* website logo row */
+/* Practice logo + name/subtitle, separated from the rest of the card by a hairline */
 .card .site-logo {
   display: flex;
   align-items: center;
@@ -238,6 +266,7 @@ body {
   color: var(--ink-soft);
 }
 
+/* Therapist name, role label and description */
 .card h2 {
   font-family: var(--serif);
   font-size: 1.9rem;
@@ -258,10 +287,10 @@ body {
   font-size: 0.95rem;
   font-weight: 300;
   color: var(--ink-soft);
-  flex: 1;
+  flex: 1; /* pushes the contact block to the bottom of the card */
 }
 
-/* Kontakt (E-Mail & Telefon) */
+/* Contact (email & phone) */
 .card .contact {
   display: flex;
   flex-direction: column;
@@ -289,6 +318,7 @@ body {
 .card .contact-item:hover { color: var(--green-deep); }
 .card .contact-item:hover svg { color: var(--green-deep); }
 
+/* "Zur Webseite" call-to-action – outlined pill; fills on card hover */
 .card .cta {
   display: inline-flex;
   align-items: center;
@@ -310,9 +340,10 @@ body {
   color: #fff;
   box-shadow: 0 12px 24px -10px rgba(42,68,59,.5);
 }
-.card:hover .cta svg { transform: translateX(4px); }
+.card:hover .cta svg { transform: translateX(4px); } /* arrow nudges right */
 
-/* ---------- Sektions-Navigation ---------- */
+/* ---------- Section navigation ---------- */
+/* Pill-shaped links below the hero; the active section is filled green */
 .section-nav-wrap { width: 100%; }
 .section-nav {
   display: flex;
@@ -347,7 +378,7 @@ body {
 }
 .section-nav a.active:hover { color: #fff; }
 
-/* ---------- Startseite: Willkommen & Themen ---------- */
+/* ---------- Home: welcome & topics ---------- */
 .home {
   flex: 1;
   width: 100%;
@@ -356,6 +387,7 @@ body {
   padding: 40px 24px 0;
 }
 
+/* Centered welcome heading + intro text */
 .welcome { text-align: center; }
 .welcome h2 {
   font-family: var(--serif);
@@ -372,6 +404,7 @@ body {
   font-weight: 300;
 }
 
+/* Topic cards: two-column grid, one panel per section of the practice */
 .topics {
   list-style: none;
   display: grid;
@@ -381,7 +414,7 @@ body {
   padding: 0;
   max-width: 860px;
 }
-.topics li { display: flex; }
+.topics li { display: flex; } /* stretch panels to equal height per row */
 .topics a {
   flex: 1;
   display: flex;
@@ -412,7 +445,8 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- Startseite: Karte & Adresse ---------- */
+/* ---------- Home: map & address ---------- */
+/* Two-column row: address panel (fixed width) + Google Maps embed (fills the rest) */
 .map-section {
   display: flex;
   gap: clamp(24px, 4vw, 48px);
@@ -435,7 +469,7 @@ body {
   color: var(--green-deep);
 }
 .map-info address {
-  font-style: normal;
+  font-style: normal; /* keep the address upright, not italic */
   color: var(--ink-soft);
   font-size: 1rem;
   font-weight: 300;
@@ -470,13 +504,15 @@ body {
   border: 0;
 }
 
-/* ---------- Burger-Menü (mobil) ---------- */
+/* ---------- Burger menu (mobile) ---------- */
+/* Fixed round button, top right. Hidden on desktop (display: none),
+   shown in the ≤900px media query below. */
 .nav-toggle {
   display: none;
   position: fixed;
   top: 16px;
   right: 16px;
-  z-index: 100;
+  z-index: 100; /* above the nav overlay (z-index 55) and page content (z-index 1) */
   width: 46px;
   height: 46px;
   padding: 0;
@@ -490,6 +526,7 @@ body {
   flex-direction: column;
   gap: 5px;
 }
+/* The three bars of the hamburger icon */
 .nav-toggle span {
   display: block;
   width: 20px;
@@ -498,6 +535,7 @@ body {
   background: var(--green-deep);
   transition: transform .3s ease, opacity .3s ease;
 }
+/* When open: the bars morph into an X (middle bar fades out) */
 .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -514,7 +552,7 @@ footer .ornament { color: var(--gold); letter-spacing: 6px; margin-bottom: 10px;
 footer .practice-name { font-size: 0.9rem; color: var(--green-mid); margin-bottom: 6px; }
 footer .links a { color: var(--green-mid); text-decoration: none; }
 footer .links a:hover { text-decoration: underline; }
-footer .links .sep { color: var(--gold); }
+footer .links .sep { color: var(--gold); } /* " · " separators between links */
 footer .meta-links {
   margin-top: 14px;
   font-size: 0.8rem;
@@ -530,6 +568,7 @@ footer .meta-links a:hover {
   border-color: var(--gold);
 }
 
+/* Fallback notice used for empty sections (build script); not shown on normal pages */
 .loading-note {
   flex-basis: 100%;
   text-align: center;
@@ -549,7 +588,7 @@ footer .meta-links a:hover {
 .legal-card {
   border-radius: 32px;
   padding: clamp(28px, 5vw, 52px);
-  animation: rise .9s ease both;
+  animation: rise .9s ease both; /* same entrance animation as the cards */
 }
 .legal-card h2 {
   font-family: var(--serif);
@@ -569,6 +608,7 @@ footer .meta-links a:hover {
 .legal-card a { color: var(--green-mid); }
 .legal-card a:hover { color: var(--green-deep); }
 
+/* Legal page hero: slightly smaller logo that lifts on hover */
 .legal-hero { padding-bottom: 30px; }
 .legal-logo {
   display: block;
@@ -586,10 +626,12 @@ footer .meta-links a:hover {
 }
 
 /* ---------- Responsive ---------- */
+/* Tablets & phones (≤900px): the pill nav becomes a slide-in drawer
+   from the right with a dim overlay; the burger button appears. */
 @media (max-width: 900px) {
   .nav-toggle { display: flex; }
-  /* Wrapper = Dim-Schicht + Clipping: liegt über dem Seiteninhalt (.page, z-Index 1),
-     aber unter dem Burger-Button (z-Index 100). Das Panel liegt im Wrapper über der Dim. */
+  /* Wrapper = dim layer + clipping: sits above the page content (.page, z-index 1)
+     but below the burger button (z-index 100). The panel sits in the wrapper above the dim. */
   .section-nav-wrap {
     position: fixed;
     inset: 0;
@@ -599,14 +641,16 @@ footer .meta-links a:hover {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .35s ease, visibility 0s linear .35s;
+    transition: opacity .35s ease, visibility 0s linear .35s; /* fade out, hide after */
   }
+  /* The .open class is toggled by the inline menu script in the generated pages */
   .section-nav-wrap.open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity .35s ease, visibility 0s;
+    transition: opacity .35s ease, visibility 0s; /* show immediately, fade in */
   }
+  /* The drawer itself: full-height column panel, initially off-screen right */
   .section-nav {
     position: absolute;
     top: 0;
@@ -621,11 +665,12 @@ footer .meta-links a:hover {
     background: var(--beige-soft);
     border-left: 1px solid var(--line);
     box-shadow: -20px 0 50px rgba(34, 48, 43, 0.18);
-    transform: translateX(100%);
+    transform: translateX(100%); /* hidden: pushed out to the right */
     transition: transform .35s ease;
     pointer-events: auto;
   }
-  .section-nav-wrap.open .section-nav { transform: translateX(0); }
+  .section-nav-wrap.open .section-nav { transform: translateX(0); } /* slide in */
+  /* Drawer links: full-width rows instead of pills */
   .section-nav a {
     justify-content: flex-start;
     padding: 13px 16px;
@@ -638,6 +683,7 @@ footer .meta-links a:hover {
   .section-nav a.active { border-color: var(--green-deep); }
 }
 
+/* Small phones (≤760px): the map stacks below the address panel */
 @media (max-width: 760px) {
   .map-section { flex-direction: column; }
   .map-info { flex: none; }
@@ -645,12 +691,15 @@ footer .meta-links a:hover {
   .map-embed iframe { min-height: 300px; }
 }
 
+/* Very narrow screens (≤640px): topics become a single column,
+   card padding tightens up */
 @media (max-width: 640px) {
   .topics { grid-template-columns: 1fr; }
   .cards { padding: 16px 18px 60px; gap: 26px; }
   .card .body { padding: 24px 22px 28px; }
 }
 
+/* Accessibility: respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
