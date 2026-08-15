@@ -43,23 +43,11 @@ const therapists = data.therapists || []; // All cards (therapists / offerings)
  * The same markup as in the former site.js – only generated at build time
  * instead of at runtime. aria-hidden because the label sits next to it.
  * -------------------------------------------------------------------------- */
-const SVG_MAIL =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-  '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
+const SVG_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>`;
 
-const SVG_PHONE =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-  '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 ' +
-  '19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 ' +
-  '2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 ' +
-  '1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+const SVG_PHONE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
 
-const SVG_ARROW =
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-  'stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/>' +
-  '<path d="M7 7h10v10"/></svg>';
+const SVG_ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>`;
 
 /* ----------------------------------------------------------------------------
  * Burger menu for mobile devices.
@@ -168,60 +156,42 @@ function renderFooterLinks() {
  * and – if present – a link to the website.
  * -------------------------------------------------------------------------- */
 function cardBody(t) {
-  const url = (t.url || '').trim();
+  const hasUrl = Boolean((t.url || '').trim());
   const portrait = t['practitioner-portrait'] || '';
   const email = (t.email || '').trim();
   const phone = (t.phone || '').trim();
-  const out = [];
-  out.push('      <div class="photo">');
-  if (portrait) {
-    out.push(
-      '        <img src="' + esc(portrait) + '" alt="Porträt von ' + esc(t['practitioner-name']) +
-      '" loading="lazy" decoding="async">'
-    );
-  }
-  out.push('        <div class="accent"></div>');
-  out.push('      </div>');
-  out.push('      <div class="body">');
-  out.push('        <div class="site-logo">');
-  if (t.logo) {
-    out.push(
-      '          <img class="icon" src="' + esc(t.logo) + '" alt="Logo ' + esc(t['page-title']) + '">'
-    );
-  }
-  out.push('          <div class="site-text">');
-  out.push('            <strong>' + esc(t['page-title']) + '</strong>');
-  out.push('            <span>' + esc(t['page-subtitle'] || '') + '</span>');
-  out.push('          </div>');
-  out.push('        </div>');
-  out.push('        <h2>' + esc(t['practitioner-name']) + '</h2>');
-  out.push('        <div class="role">' + esc(t.subtitle || '') + '</div>');
-  out.push('        <p>' + esc(t.text || '') + '</p>');
-  if (email || phone) {
-    out.push('        <div class="contact">');
-    if (email) {
-      out.push('          <a class="contact-item" href="mailto:' + esc(email) + '">');
-      out.push('            ' + SVG_MAIL);
-      out.push('            ' + esc(email));
-      out.push('          </a>');
-    }
-    if (phone) {
-      // The "tel:" href may only contain digits and one leading "+".
-      const tel = phone.replace(/[^+\d]/g, '');
-      out.push('          <a class="contact-item" href="tel:' + esc(tel) + '">');
-      out.push('            ' + SVG_PHONE);
-      out.push('            ' + esc(phone));
-      out.push('          </a>');
-    }
-    out.push('        </div>');
-  }
-  if (url) {
-    out.push('        <a class="cta" href="' + esc(url) + '" target="_blank" rel="noopener">Zur Webseite');
-    out.push('          ' + SVG_ARROW);
-    out.push('        </a>');
-  }
-  out.push('      </div>');
-  return out.join('\n');
+  // "tel:" hrefs may only contain digits and one leading "+".
+  const tel = phone ? phone.replace(/[^+\d]/g, '') : '';
+  return `
+      <div class="photo">
+        ${portrait ? `<img src="${esc(portrait)}" alt="Porträt von ${esc(t['practitioner-name'])}" loading="lazy" decoding="async">` : ''}
+        <div class="accent"></div>
+      </div>
+      <div class="body">
+        <div class="site-logo">
+          ${t.logo ? `<img class="icon" src="${esc(t.logo)}" alt="Logo ${esc(t['page-title'])}">` : ''}
+          <div class="site-text">
+            <strong>${esc(t['page-title'])}</strong>
+            <span>${esc(t['page-subtitle'] || '')}</span>
+          </div>
+        </div>
+        <h2>${esc(t['practitioner-name'])}</h2>
+        <div class="role">${esc(t.subtitle || '')}</div>
+        <p>${esc(t.text || '')}</p>
+        ${email || phone ? `<div class="contact">
+          ${email ? `<a class="contact-item" href="mailto:${esc(email)}">
+            ${SVG_MAIL}
+            ${esc(email)}
+          </a>` : ''}
+          ${phone ? `<a class="contact-item" href="tel:${esc(tel)}">
+            ${SVG_PHONE}
+            ${esc(phone)}
+          </a>` : ''}
+        </div>` : ''}
+        ${hasUrl ? `<a class="cta" href="${esc(t.url)}" target="_blank" rel="noopener">Zur Webseite
+          ${SVG_ARROW}
+        </a>` : ''}
+      </div>`;
 }
 
 /* ----------------------------------------------------------------------------
