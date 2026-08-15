@@ -3,13 +3,18 @@
     "name": "Praxis am Mühlbach",
     "tagline": "Gemeinschaftspraxis",
     "logo": "logo.png",
-    "intro": "Herzlich willkommen! Entdecken Sie die Ordinationen unserer Gemeinschaftspraxis – erfahrene Behandlerinnen mit individuellen Schwerpunkten, ganzheitlich an Ihrer Seite."
+    "intro": "Herzlich willkommen in unserer Gemeinschaftspraxis am Mühlbach! Bei uns erwartet Sie ein erfahrenes Team mit individuellen Schwerpunkten – von Traditioneller Chinesischer Medizin über Psychotherapie und Klinische Psychologie bis zu Qi Gong & Yoga. Ganzheitlich an Ihrer Seite.",
+    "address": {
+      "street": "Schwartzstraße 7/7",
+      "city": "2500 Baden",
+      "country": "Österreich"
+    }
   },
   "sections": [
-    { "id": "aerztinnen", "title": "Ärztinnen", "file": "aerztinnen.html" },
-    { "id": "psychotherapie", "title": "Psychotherapie", "file": "psychotherapie.html" },
-    { "id": "klinische-psychologie", "title": "Klinische Psychologie", "file": "klinische-psychologie.html" },
-    { "id": "gruppenkurse", "title": "Gruppenkurse", "file": "gruppenkurse.html" }
+    { "id": "aerztinnen", "title": "Ärztinnen", "file": "aerztinnen.html", "description": "Traditionelle Chinesische Medizin und westliche Medizin – Akupunktur, chinesische Arzneimitteltherapie und ganzheitliche Frauengesundheit." },
+    { "id": "psychotherapie", "title": "Psychotherapie", "file": "psychotherapie.html", "description": "Personzentrierte und existenzanalytische Psychotherapie für Erwachsene, Jugendliche und Kinder." },
+    { "id": "klinische-psychologie", "title": "Klinische Psychologie", "file": "klinische-psychologie.html", "description": "Klinische und gesundheitspsychologische Begleitung, Beratung und Diagnostik – einfühlsam und auf Augenhöhe." },
+    { "id": "gruppenkurse", "title": "Gruppenkurse", "file": "gruppenkurse.html", "description": "Qi Gong und Meridian Yoga – sanftes Entspannungstraining für Gesundheit, Beweglichkeit und innere Ruhe." }
   ],
   "therapists": [
     {

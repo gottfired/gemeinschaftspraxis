@@ -64,7 +64,7 @@
 
     const home = document.createElement('a');
     home.href = 'index.html';
-    home.textContent = 'Startseite';
+    home.textContent = 'Willkommen';
     if (!currentSection) {
       home.setAttribute('aria-current', 'page');
       home.classList.add('active');
@@ -187,28 +187,52 @@
     });
   }
 
-  function renderOverview(sections, therapists) {
-    if (!sections || sections.length === 0) {
-      showNote('Keine Bereiche konfiguriert.');
-      return;
-    }
-    cardsContainer.innerHTML = '';
-    sections.forEach((s) => {
-      const members = (therapists || []).filter((t) => t.section === s.id);
-      const card = document.createElement('a');
-      card.className = 'card section-card';
-      card.href = s.file;
-      card.innerHTML = `
-        <div class="body">
-          <h2>${escapeHtml(s.title)}</h2>
-          ${s.description ? `<p class="section-description">${escapeHtml(s.description)}</p>` : ''}
-          ${members.length ? `<p class="section-names">${members.map((m) => escapeHtml(m['practitioner-name'])).join(' · ')}</p>` : ''}
-          <span class="cta">Zum Bereich
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-          </span>
-        </div>`;
-      cardsContainer.appendChild(card);
+  // ---- Startseite: Willkommen, Themen-Übersicht & Karte ----
+  function renderTopics(sections) {
+    const topics = document.getElementById('topics');
+    if (!topics) return;
+    topics.innerHTML = '';
+    (sections || []).forEach((s) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = s.file;
+      const strong = document.createElement('strong');
+      strong.textContent = s.title;
+      a.appendChild(strong);
+      if (s.description) {
+        const span = document.createElement('span');
+        span.textContent = s.description;
+        a.appendChild(span);
+      }
+      li.appendChild(a);
+      topics.appendChild(li);
     });
+  }
+
+  function renderAddress(practice) {
+    const address = practice.address || {};
+    const addrEl = document.getElementById('practice-address');
+    if (addrEl) {
+      const lines = [address.street, address.city, address.country].filter(Boolean);
+      addrEl.textContent = lines.join(', ');
+    }
+    // Google-Maps-Embed ohne API-Key (output=embed)
+    const query = encodeURIComponent([address.street, address.city].filter(Boolean).join(', '));
+    const frame = document.getElementById('map-frame');
+    if (frame && query) {
+      frame.src = 'https://www.google.com/maps?q=' + query + '&z=16&output=embed';
+    }
+    const link = document.getElementById('map-link');
+    if (link && query) {
+      link.href = 'https://www.google.com/maps?q=' + query;
+    }
+  }
+
+  function renderHome(practice, sections) {
+    const welcome = document.getElementById('welcome-text');
+    if (welcome) welcome.textContent = practice.intro || '';
+    renderTopics(sections);
+    renderAddress(practice);
   }
 
   function render(data) {
@@ -223,7 +247,7 @@
     if (currentSection) {
       renderCards(therapists.filter((t) => t.section === currentSection));
     } else {
-      renderOverview(sections, therapists);
+      renderHome(practice, sections);
     }
   }
 

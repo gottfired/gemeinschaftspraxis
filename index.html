@@ -26,16 +26,30 @@
     </div>
     <div class="eyebrow" id="practice-tagline">Gemeinschaftspraxis</div>
     <h1 id="practice-title">Praxis am Mühlbach</h1>
-    <p class="sub" id="practice-intro">Herzlich willkommen! Lernen Sie unsere Ordinationen und unser Team kennen.</p>
   </header>
 
   <div class="section-nav-wrap">
     <nav class="section-nav" id="section-nav" aria-label="Bereiche der Praxis"></nav>
   </div>
 
-  <main class="cards" id="cards">
-    <p class="loading-note" id="loading-note">Die Inhalte werden geladen …</p>
-    <noscript><p class="loading-note">Bitte aktivieren Sie JavaScript, um die Ordinationen unserer Gemeinschaftspraxis anzuzeigen.</p></noscript>
+  <main class="home">
+    <section class="welcome">
+      <h2>Herzlich willkommen</h2>
+      <p class="lead" id="welcome-text"></p>
+      <ul class="topics" id="topics"></ul>
+      <noscript><p class="loading-note">Bitte aktivieren Sie JavaScript, um die Inhalte anzuzeigen.</p></noscript>
+    </section>
+
+    <section class="map-section">
+      <div class="map-info">
+        <h2>So finden Sie uns</h2>
+        <address id="practice-address"></address>
+        <a class="map-link" id="map-link" target="_blank" rel="noopener">Route in Google Maps anzeigen</a>
+      </div>
+      <div class="map-embed">
+        <iframe id="map-frame" title="Karte zur Praxis am Mühlbach" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
   </main>
 
   <footer>

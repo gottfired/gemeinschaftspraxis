@@ -304,23 +304,138 @@ body {
 }
 .section-nav a.active:hover { color: #fff; }
 
-/* ---------- Sektions-Übersicht (Startseite) ---------- */
-.card.section-card { justify-content: flex-start; }
-.card.section-card h2 { margin-bottom: 10px; }
-.card.section-card .section-description,
-.card.section-card .section-names { flex: none; }
-.card.section-card .section-description {
-  color: var(--ink-soft);
-  font-weight: 300;
-  font-size: 0.95rem;
+/* ---------- Startseite: Willkommen & Themen ---------- */
+.home {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
 }
-.card.section-card .section-names {
+
+.welcome { text-align: center; }
+.welcome h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  color: var(--green-deep);
+  margin-bottom: 16px;
+}
+.welcome .lead {
+  max-width: 640px;
+  margin: 0 auto;
   color: var(--ink-soft);
+  font-size: 1.05rem;
   font-weight: 300;
+}
+
+.topics {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(18px, 3vw, 28px);
+  margin: clamp(36px, 5vw, 56px) auto 0;
+  padding: 0;
+  max-width: 860px;
+}
+.topics li {
+  display: flex;
+}
+.topics a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 28px;
+  border-radius: 24px;
+  background: var(--beige-soft);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  transition: transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s ease, border-color .4s ease;
+}
+.topics a:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+.topics strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+.topics span {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ---------- Startseite: Karte & Adresse ---------- */
+.map-section {
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: stretch;
+  margin: clamp(48px, 7vw, 80px) 0 0;
+}
+.map-info {
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 34px 30px;
+  background: var(--beige-soft);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+.map-info h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+.map-info address {
+  font-style: normal;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.map-info .map-link {
+  align-self: flex-start;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
   font-size: 0.9rem;
-  margin-top: 6px;
+  color: var(--green-deep);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--gold);
+  padding-bottom: 2px;
+  transition: color .3s ease, border-color .3s ease;
 }
-.card.section-card .cta { margin-top: auto; }
+.map-info .map-link:hover { color: var(--green-mid); border-color: var(--green-mid); }
+.map-embed {
+  flex: 1;
+  min-height: 360px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  border: 0;
+}
 
 /* ---------- Burger-Menü (mobil) ---------- */
 .nav-toggle {
@@ -495,6 +610,17 @@ footer .meta-links a {
 footer .meta-links a:hover {
   color: var(--green-deep);
   border-color: var(--gold);
+}
+
+@media (max-width: 760px) {
+  .map-section { flex-direction: column; }
+  .map-info { flex: none; }
+  .map-embed { min-height: 300px; }
+  .map-embed iframe { min-height: 300px; }
+}
+
+@media (max-width: 640px) {
+  .topics { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
