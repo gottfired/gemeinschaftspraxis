@@ -69,7 +69,20 @@ const MENU_SCRIPT = `<button type="button" class="nav-toggle" aria-label="Menü 
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
   }
-  toggle.addEventListener('click', function () { setMenu(!wrap.classList.contains('open')); });
+  toggle.addEventListener('click', function () {
+    // Enable the drawer transitions: the CSS gates them behind .menu-ready on
+    // <html>, so resizing across the mobile breakpoint (which changes the
+    // drawer's transform/opacity) never animates it sliding/fading away – only
+    // real open/close toggles animate.
+    document.documentElement.classList.add('menu-ready');
+    // Forced reflow. Without it, adding .menu-ready and toggling .open would be
+    // batched into a single style recalc: the transition would be enabled at the
+    // exact same instant the transform changes, so it would never start and the
+    // first open would snap instead of sliding. Reading offsetWidth flushes the
+    // class change first, so the transition is active when .open moves the drawer.
+    void document.documentElement.offsetWidth;
+    setMenu(!wrap.classList.contains('open'));
+  });
   wrap.addEventListener('click', function (e) { if (!e.target.closest('.section-nav')) setMenu(false); });
   nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });

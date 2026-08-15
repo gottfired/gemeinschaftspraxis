@@ -641,14 +641,12 @@ footer .meta-links a:hover {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .35s ease, visibility 0s linear .35s; /* fade out, hide after */
   }
   /* The .open class is toggled by the inline menu script in the generated pages */
   .section-nav-wrap.open {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity .35s ease, visibility 0s; /* show immediately, fade in */
   }
   /* The drawer itself: full-height column panel, initially off-screen right */
   .section-nav {
@@ -658,6 +656,10 @@ footer .meta-links a:hover {
     bottom: 0;
     width: min(320px, 85vw);
     margin-top: 0;
+    /* Override the base rule's justify-content: center – in this column
+       layout it would center the links vertically. Align them to the top;
+       the 88px top padding keeps them clear of the burger button. */
+    justify-content: flex-start;
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
@@ -666,7 +668,6 @@ footer .meta-links a:hover {
     border-left: 1px solid var(--line);
     box-shadow: -20px 0 50px rgba(34, 48, 43, 0.18);
     transform: translateX(100%); /* hidden: pushed out to the right */
-    transition: transform .35s ease;
     pointer-events: auto;
   }
   .section-nav-wrap.open .section-nav { transform: translateX(0); } /* slide in */
@@ -682,6 +683,15 @@ footer .meta-links a:hover {
   .section-nav a:hover { transform: none; }
   .section-nav a.active { border-color: var(--green-deep); }
 }
+
+/* Drawer transitions are gated behind .menu-ready, which the inline menu
+   script sets on the <html> element the first time the menu is opened.
+   Without this, resizing across the mobile breakpoint would animate the
+   drawer sliding/fading away, because the transform/opacity values change
+   when the media query kicks in. */
+.menu-ready .section-nav-wrap { transition: opacity .35s ease, visibility 0s linear .35s; }
+.menu-ready .section-nav-wrap.open { transition: opacity .35s ease, visibility 0s; }
+.menu-ready .section-nav { transition: transform .35s ease; }
 
 /* Small phones (≤760px): the map stacks below the address panel */
 @media (max-width: 760px) {
