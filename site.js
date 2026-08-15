@@ -145,6 +145,8 @@
   function cardMarkup(t) {
     const hasUrl = Boolean((t.url || '').trim());
     const portrait = t['practitioner-portrait'] || '';
+    const email = (t.email || '').trim();
+    const phone = (t.phone || '').trim();
     return `
       <div class="photo">
         ${portrait ? `<img src="${escapeHtml(portrait)}" alt="Porträt von ${escapeHtml(t['practitioner-name'])}" loading="lazy" decoding="async">` : ''}
@@ -161,9 +163,19 @@
         <h2>${escapeHtml(t['practitioner-name'])}</h2>
         <div class="role">${escapeHtml(t.subtitle)}</div>
         <p>${escapeHtml(t.text)}</p>
-        ${hasUrl ? `<span class="cta">Zur Webseite
+        ${(email || phone) ? `<div class="contact">
+          ${email ? `<a class="contact-item" href="mailto:${escapeHtml(email)}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            ${escapeHtml(email)}
+          </a>` : ''}
+          ${phone ? `<a class="contact-item" href="tel:${escapeHtml(phone.replace(/[^+\d]/g, ''))}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            ${escapeHtml(phone)}
+          </a>` : ''}
+        </div>` : ''}
+        ${hasUrl ? `<a class="cta" href="${escapeHtml(t.url)}" target="_blank" rel="noopener">Zur Webseite
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-        </span>` : ''}
+        </a>` : ''}
       </div>`;
   }
 
@@ -175,13 +187,10 @@
     cardsContainer.innerHTML = '';
     therapists.forEach((t) => {
       const hasUrl = Boolean((t.url || '').trim());
-      const card = document.createElement(hasUrl ? 'a' : 'div');
+      // Karte als <div>: enthält eigene Links (E-Mail, Telefon, Webseite),
+      // verschachtelte <a> wären ungültiges HTML.
+      const card = document.createElement('div');
       card.className = hasUrl ? 'card' : 'card no-link';
-      if (hasUrl) {
-        card.href = t.url;
-        card.target = '_blank';
-        card.rel = 'noopener';
-      }
       card.innerHTML = cardMarkup(t);
       cardsContainer.appendChild(card);
     });
