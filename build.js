@@ -2,13 +2,19 @@
 /* ============================================================================
  * Build script for the Praxis am Mühlbach website
  * ----------------------------------------------------------------------------
- * Generates the finished static HTML pages in the repo root:
+ * Generates the finished static site in the build/ folder:
  *
  *   - Templates:  templates/*.html (page skeleton with <!-- BUILD:... --> markers)
  *   - Content:    therapists.json (practice, sections, therapists)
  *   - Command:    npm run build   (→ node build.js)
- *   - Output:     index.html, aerztinnen.html, psychotherapie.html,
- *                 klinische-psychologie.html, gruppenkurse.html
+ *   - Output:     build/ – the deployable static site (HTML + all assets):
+ *                 index.html, aerztinnen.html, psychotherapie.html,
+ *                 klinische-psychologie.html, gruppenkurse.html, impressum.html,
+ *                 style.css, CNAME and all images (logos, portraits, logo.jpg).
+ *
+ * build/ is wiped and rebuilt on every run, so it always contains exactly the
+ * current site. Deploy that folder as-is (e.g. copy its contents to the web
+ * root of your host).
  *
  * The generated pages contain all content directly in the HTML – there is no
  * site.js and no fetch() anymore. Loading the content can therefore no longer
@@ -31,6 +37,10 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname); // Repo root (where package.json lives)
 const TEMPLATES = path.join(ROOT, 'templates'); // Folder containing the templates
+const BUILD = path.join(ROOT, 'build'); // Deployable static site (wiped & rebuilt on every run)
+
+// Files copied into build/ unchanged (not generated from templates).
+const STATIC_FILES = ['style.css', 'CNAME', 'impressum.html'];
 
 // Single source of truth: all website content comes from this one file.
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'therapists.json'), 'utf8'));
@@ -241,8 +251,58 @@ function mapQuery() {
 }
 
 /* ----------------------------------------------------------------------------
+ * referencedAssets() – every image referenced by the content (practice logo,
+ * portraits, practice logos). build/ must contain them, otherwise the deployed
+ * site would show broken images.
+ * -------------------------------------------------------------------------- */
+function referencedAssets() {
+  const files = new Set();
+  if (practice.logo) files.add(practice.logo);
+  for (const t of therapists) {
+    if (t['practitioner-portrait']) files.add(t['practitioner-portrait']);
+    if (t.logo) files.add(t.logo);
+  }
+  return [...files].filter(Boolean);
+}
+
+/* copyFile(src, dest) – copies one file, creating the destination folder. */
+function copyFile(src, dest) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  console.log('copied: ' + path.relative(BUILD, dest));
+}
+
+/* ----------------------------------------------------------------------------
+ * resetBuild() – empties the build folder so no stale files survive a rebuild.
+ * -------------------------------------------------------------------------- */
+function resetBuild() {
+  fs.rmSync(BUILD, { recursive: true, force: true });
+  fs.mkdirSync(BUILD, { recursive: true });
+}
+
+/* ----------------------------------------------------------------------------
+ * copyStatic() – copies style.css, CNAME, impressum.html and all images
+ * referenced in therapists.json into build/ (preserving folder structure).
+ * Fails loudly if a referenced file is missing, same as with templates.
+ * -------------------------------------------------------------------------- */
+function copyStatic() {
+  for (const file of STATIC_FILES) {
+    const src = path.join(ROOT, file);
+    if (!fs.existsSync(src)) throw new Error('Required static file is missing: ' + file);
+    copyFile(src, path.join(BUILD, file));
+  }
+  for (const asset of referencedAssets()) {
+    const src = path.join(ROOT, asset);
+    if (!fs.existsSync(src)) {
+      throw new Error('Asset referenced in therapists.json is missing: ' + asset);
+    }
+    copyFile(src, path.join(BUILD, asset));
+  }
+}
+
+/* ----------------------------------------------------------------------------
  * buildPage(templatePath, outPath) – fills ONE template and writes the result
- * to outPath (repo root). Steps:
+ * to outPath (the build folder). Steps:
  *
  *   1. Detect the section from data-section on the <body> (null = home page).
  *   2. Replace all <!-- BUILD:... --> markers with generated HTML.
@@ -260,7 +320,7 @@ function buildPage(templatePath, outPath) {
 
   // Markers replaced on EVERY page (nav, footer, hero, logo).
   const replacements = {
-    'logo-src': practice.logo || 'logo.jpg',
+    'logo-src': practice.logo || 'images/logo.jpg',
     'logo-alt': 'Logo ' + (practice.name || 'der Praxis'),
     tagline: practice.tagline || '',
     'footer-name': practice.name || '',
@@ -320,17 +380,21 @@ function buildPage(templatePath, outPath) {
 }
 
 /* ----------------------------------------------------------------------------
- * main() – processes all templates in templates/ (sorted alphabetically)
- * and writes one generated page per template into the repo root.
+ * main() – resets build/, copies the static assets, then processes all
+ * templates in templates/ (sorted alphabetically) and writes one generated
+ * page per template into build/.
  * -------------------------------------------------------------------------- */
 function main() {
+  resetBuild();
+  copyStatic();
   const names = fs
     .readdirSync(TEMPLATES)
     .filter((n) => n.endsWith('.html'))
     .sort();
   for (const name of names) {
-    buildPage(path.join(TEMPLATES, name), path.join(ROOT, name));
+    buildPage(path.join(TEMPLATES, name), path.join(BUILD, name));
   }
+  console.log('\nSite ready in ' + path.relative(ROOT, BUILD) + '/');
 }
 
 main();
