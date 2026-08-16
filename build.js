@@ -37,7 +37,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname); // Repo root (where package.json lives)
 const TEMPLATES = path.join(ROOT, 'templates'); // Folder containing the templates
-const BUILD = path.join(ROOT, 'build'); // Deployable static site (wiped & rebuilt on every run)
+const BUILD = path.join(ROOT, 'docs'); // Deployable static site (wiped & rebuilt on every run)
 
 // Files copied into build/ unchanged (not generated from templates).
 const STATIC_FILES = ['style.css', 'CNAME', 'impressum.html'];
