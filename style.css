@@ -82,7 +82,7 @@ body {
 /* No hero fade-in – otherwise the top animates again on every page change */
 .hero {
   text-align: center;
-  padding: clamp(64px, 9vw, 110px) 24px 0;
+  padding: clamp(40px, 6vw, 72px) 24px 0;
 }
 
 /* Logo in a rounded, softly shadowed "ring" */
@@ -99,7 +99,7 @@ body {
 }
 .hero .logo-ring img {
   display: block;
-  width: min(78vw, 420px);
+  width: min(60vw, 320px);
   max-width: 100%;
   height: auto;
 }
