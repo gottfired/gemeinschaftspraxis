@@ -158,9 +158,18 @@ function renderTopics() {
 /* ----------------------------------------------------------------------------
  * renderFooterLinks() – footer: links to the external websites of all
  * therapists that have a url in therapists.json (separated by " · ").
+ * Each website is linked only once: a therapist can appear in several
+ * sections (e.g. TCM Chen in Ärztinnen and Gruppenkurse) with the same
+ * url, which must not create a duplicate link.
  * -------------------------------------------------------------------------- */
 function renderFooterLinks() {
-  const linked = therapists.filter((t) => (t.url || '').trim());
+  const seen = new Set();
+  const linked = therapists.filter((t) => {
+    const url = (t.url || '').trim();
+    if (!url || seen.has(url)) return false;
+    seen.add(url);
+    return true;
+  });
   const out = [];
   linked.forEach((t, i) => {
     if (i > 0) out.push('<span class="sep" aria-hidden="true"> · </span>');
