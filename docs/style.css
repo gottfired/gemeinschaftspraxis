@@ -1,5 +1,5 @@
 /* ============================================================================
-   Praxis am Mühlbach – global stylesheet
+   die Mühlbachpraxis – global stylesheet
    ----------------------------------------------------------------------------
    Shared styles for all pages of the site. The HTML pages are generated from
    templates/ by build.js (`npm run build`) – the page structure lives in the
@@ -91,7 +91,7 @@ body {
   width: fit-content;
   max-width: 100%; /* Don't overflow on narrow viewports so the logo stays centered */
   margin: 0 auto 34px;
-  background: #f9f9f5; /* Logo hue (slightly darker than #fff) */
+  background: #fafafa; /* Logo hue (slightly darker than #fff) */
   border: 1px solid rgba(42, 68, 59, 0.12);
   border-radius: 28px;
   padding: clamp(18px, 3.5vw, 34px) clamp(28px, 5vw, 56px);

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================================================
- * Build script for the Praxis am Mühlbach website
+ * Build script for the Mühlbachpraxis website
  * ----------------------------------------------------------------------------
  * Generates the finished static site in the build/ folder:
  *
