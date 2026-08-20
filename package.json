@@ -2,7 +2,7 @@
   "name": "gemeinschaftspraxis",
   "private": true,
   "version": "1.0.0",
-  "description": "die Mühlbachpraxis – statische Website, generiert aus templates/ und therapists.json",
+  "description": "die Mühlbachpraxis – statische Website, generiert aus templates/ und therapists.js",
   "scripts": {
     "build": "node build.js"
   }
