@@ -75,7 +75,7 @@ Psychosomatik im Erwachsenenalter
 Erwachsene nach ICD-11-Kriterien  
 Psychoonkologie
 
-Zusammenarbeit im Geundheitsbereich
+Zusammenarbeit im Gesundheitsbereich
 
 Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor
 `,
