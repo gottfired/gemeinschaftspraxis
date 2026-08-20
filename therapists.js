@@ -67,7 +67,18 @@ module.exports = {
       "practitioner-name": "Mag. Claudia Matzka",
       "practitioner-portrait": "images/portrait-claudia-matzka.jpg",
       subtitle: "Klinische Psychologin, Gesundheitspsychologin, Psychotherapeutin (Existenzanalyse), Kinder, Jugendliche, Erwachsene",
-      text: "Schwerpunkte: Kinderpsychosomatik allgemein, Essstörungen, Schwerpunkt Anorexie, Jugendliche Krisen, Depressionen, Angststörungen, Pubertäre Krisen, Eltern- und Familiengespräche Psychosomatik im Erwachsenenalter Erwachsene nach ICD-11-Kriterien Psychoonkologie Zusammenarbeit im Geundheitsbereich Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor",
+      text: `
+**Schwerpunkte:**  
+Kinderpsychosomatik allgemein, Essstörungen, Schwerpunkt Anorexie, Jugendliche Krisen, Depressionen, Angststörungen, Pubertäre Krisen, Eltern- und Familiengespräche
+
+Psychosomatik im Erwachsenenalter  
+Erwachsene nach ICD-11-Kriterien  
+Psychoonkologie
+
+Zusammenarbeit im Geundheitsbereich
+
+Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor
+`,
       email: "praxis.matzka@gmail.com",
       phone: "+43 699 115 41 445",
       url: ""
@@ -132,15 +143,19 @@ module.exports = {
       "practitioner-name": "Nicole Frank",
       "practitioner-portrait": "images/portrait-nicole-frank.jpg",
       subtitle: "Sozialpädagogin, Yogalehrerin, Angehende Psychotherapeutin",
-      text: `#test
-      - item 1
-      - item 2
-      - item 3
-      
-      some text  
-      some rmore test
-      
-      sdfasdf`,
+      text: `
+**Dientags von 18.30 - 20 Uhr**, für Anfänger und Fortgeschrittene.
+
+Präsent, kraftvoll und entspannt im Alltag sein.
+Mithilfe unterschiedlicher Techniken (Körperliche Haltungen und Bewegungsabläufe, Atem-, Wahrnehmungs-, Aufmerksamkeits- und Achtsamkeitsübungen) aus verschiedenen Yogastilen inspiriert bringen wir Balance in unser System. Durch bewussten Umgang mit der Atmung in Kombination mit achtsamen Bewegungen kann der Geist im Hier und Jetzt zur Ruhe kommen. Der Körper wird gekräftigt, gedehnt und mobilisiert.
+Eine *unverbindliche Schnuppereinheit um 10 €* ist nach Anmeldung jederzeit möglich.
+
+**Die regulären Preise für den Gruppenunterricht:**
+
+10er-Block: 170 €  
+5er-Block: 100 €  
+Einzeleinheit: 22 €  
+      `,
       email: "niki.frank@gmx.at",
       phone: "+43 664 5342667",
       url: ""

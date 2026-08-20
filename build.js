@@ -30,10 +30,11 @@
  * ========================================================================== */
 'use strict';
 
-// Only Node standard library – no external dependencies,
-// so no `npm install` is required.
+// One small third-party dependency: marked (Markdown → HTML at build time).
+// Everything else is Node standard library.
 const fs = require('fs');
 const path = require('path');
+const { marked } = require('marked');
 
 const ROOT = path.resolve(__dirname); // Repo root (where package.json lives)
 const TEMPLATES = path.join(ROOT, 'templates'); // Folder containing the templates
@@ -114,6 +115,50 @@ function esc(value) {
     '"': '&quot;',
     "'": '&#39;',
   }[c]));
+}
+
+/* ----------------------------------------------------------------------------
+ * dedent(text) – a template literal inside an indented JS file keeps its
+ * leading whitespace, so the common indentation of all non-empty lines is
+ * removed and empty first/last lines are dropped. Without this, indented
+ * Markdown (e.g. "- item") would be parsed as code instead of a list.
+ * -------------------------------------------------------------------------- */
+function dedent(text) {
+  const lines = String(text || '').split('\n');
+  let indent = Infinity;
+  for (const line of lines) {
+    if (line.trim().length === 0) continue;
+    const ws = line.match(/^ */)[0].length;
+    if (ws < indent) indent = ws;
+  }
+  const strip = indent === Infinity ? 0 : indent;
+  return lines
+    .map((line) => line.slice(strip))
+    .join('\n')
+    .replace(/^\n+|\n+$/g, '');
+}
+
+/* ----------------------------------------------------------------------------
+ * markdown(text) – converts Markdown content (the "text" fields in
+ * therapists.js) to HTML at build time, using the marked library.
+ *
+ * Sanitization – content must never become executable markup:
+ *   - Raw HTML in the source is neutralized first: &, < and > are escaped
+ *     before parsing, so <script> etc. can never pass through. Markdown
+ *     syntax (**, *, [..](..), #, -, >) is unaffected.
+ *   - marked emits href/src attributes as-is, so dangerous URL schemes are
+ *     filtered afterwards (javascript:, vbscript:, data: are blanked).
+ * -------------------------------------------------------------------------- */
+function markdown(text) {
+  const safe = dedent(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const html = marked.parse(safe, { gfm: true });
+  return html.replace(/(href|src)="([^"]*)"/gi, (match, attr, url) => {
+    const clean = url.replace(/&amp;/g, '&').trim().toLowerCase();
+    return /^(javascript|vbscript|data):/.test(clean) ? attr + '=""' : match;
+  });
 }
 
 /* Returns the section object (title, file, description) for an id
@@ -210,7 +255,7 @@ function cardBody(t) {
         </div>
         <h2>${esc(t['practitioner-name'])}</h2>
         <div class="role">${esc(t.subtitle || '')}</div>
-        <p>${esc(t.text || '')}</p>
+        <div class="markdown">${markdown(t.text || '')}</div>
         ${email || phone ? `<div class="contact">
           ${email ? `<a class="contact-item" href="mailto:${esc(email)}">
             ${SVG_MAIL}

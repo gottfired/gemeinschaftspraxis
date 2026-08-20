@@ -5,5 +5,8 @@
   "description": "die Mühlbachpraxis – statische Website, generiert aus templates/ und therapists.js",
   "scripts": {
     "build": "node build.js"
+  },
+  "dependencies": {
+    "marked": "^18.0.10"
   }
 }

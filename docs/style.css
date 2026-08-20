@@ -156,13 +156,12 @@ body {
 }
 
 /* ---------- Cards ---------- */
-/* Section pages: flexible row of therapist cards, wrapped, centered */
+/* Section pages: therapist cards in a two-column grid. Auto-placement puts
+   a third card below the first, same width as every other card. */
 .cards {
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(28px, 4vw, 56px);
   max-width: 1240px;
   margin: 0 auto;
@@ -174,10 +173,8 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Shrink instead of wrapping immediately: 2-3 cards stay side by side */
-  flex: 1 1 320px;
-  min-width: 240px;
-  max-width: 480px;
+  /* Grid child: fill its column, equal width to every other card */
+  min-width: 0;
   border-radius: 32px;
   overflow: hidden;
   text-decoration: none;
@@ -283,11 +280,50 @@ body {
   color: var(--gold-deep);
   margin-bottom: 14px;
 }
-.card p {
+.card .markdown {
+  flex: 1; /* pushes the contact block to the bottom of the card */
+}
+.card .markdown p {
   font-size: 0.95rem;
   font-weight: 300;
   color: var(--ink-soft);
-  flex: 1; /* pushes the contact block to the bottom of the card */
+}
+.card .markdown p + p {
+  margin-top: 14px;
+}
+.card .markdown ul,
+.card .markdown ol {
+  margin: 0 0 14px;
+  padding-left: 1.25em;
+}
+.card .markdown li {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.card .markdown li:last-child {
+  margin-bottom: 0;
+}
+.card .markdown a {
+  color: var(--green-deep);
+  text-decoration: underline;
+}
+.card .markdown blockquote {
+  margin: 0 0 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--gold-deep);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+.card .markdown h3,
+.card .markdown h4 {
+  margin: 18px 0 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.04em;
 }
 
 /* Contact (email & phone) */
@@ -705,7 +741,7 @@ footer .meta-links a:hover {
    card padding tightens up */
 @media (max-width: 640px) {
   .topics { grid-template-columns: 1fr; }
-  .cards { padding: 16px 18px 60px; gap: 26px; }
+  .cards { grid-template-columns: 1fr; padding: 16px 18px 60px; gap: 26px; }
   .card .body { padding: 24px 22px 28px; }
 }
 
