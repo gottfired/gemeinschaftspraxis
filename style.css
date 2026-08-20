@@ -288,6 +288,10 @@ body {
   font-weight: 300;
   color: var(--ink-soft);
 }
+.card .markdown strong {
+  font-weight: 700;
+  /* color: var(--ink); -> enable if you want to highlight strong markdown text */
+}
 .card .markdown p + p {
   margin-top: 14px;
 }
