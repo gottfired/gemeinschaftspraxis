@@ -120,7 +120,7 @@ Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor
       text: "Angeboten werden Medizinisches Qi Gong, Duft Qi Gong und Die 6 Heilenden Laute. Qi Gong ist eine sanfte Bewegungs- und Entspannungsmethode, die Körper, Geist und Seele in Einklang bringt.",
       email: "praxis@tcm-chen.com",
       phone: "+43 699 817 24 716",
-      url: "https://tcm-chen.at"
+      url: "https://tcm-chen.com/qi_gong.html"
     },
     {
       section: "gruppenkurse",
@@ -129,8 +129,27 @@ Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor
       "page-subtitle": "Qi Gong & Yoga",
       "practitioner-name": "Andrea Hofmann",
       "practitioner-portrait": "images/portrait-andrea-hofmann.jpg",
-      subtitle: "Qi Gong & Meridian Yoga",
-      text: "Wudang Qi Gong und Meridian Yoga (Makko-Ho nach Shizuto Masunaga) – sanftes Entspannungstraining für Gesundheit, Beweglichkeit und den Fluss der Meridian-Energie. Die Übungen sind für jeden geeignet und werden mit Aufwärmübungen, Mobilisation der Gelenke und einer abschließenden Meditation abgerundet. Jeden Donnerstag in Baden bei Wien.",
+      subtitle: "Qi Gong & Meridian Yoga, Krafttraining für Frauen",
+      text: `
+### Wudang Qi Gong und Meridian Yoga
+(Makko-Ho nach Shizuto Masunaga) – sanftes
+Entspannungstraining für Gesundheit, Beweglichkeit und den Fluss der Meridian-
+Energie. Die Übungen sind für jeden geeignet und werden mit Aufwärmübungen,
+Mobilisation der Gelenke und einer abschließenden Meditation abgerundet.
+
+**Jeden Donnerstag, 17:30**
+
+### TRAINING - Gesund & kraftvoll älter werden - Das Spezialtraining für Frauen
+Älterwerden ist eine Reise, die voller Kraft und Lebendigkeit stecken darf. Dieses Training
+unterstützt den weiblichen Körper bei den Veränderungen im Laufe der Jahre.
+Das erwartet dich beim Frauentraining:
+Gezielte Übungen zur Stärkung von Beweglichkeit und Vitalität.
+Achtsamkeitstechniken für hormonelle Balance und innere Ruhe.
+Praktische Tipps für mehr Energie im Alltag.
+Gemeinsamer Austausch in einem geschützten, herzlichen Kreis.
+
+**Jeden Donnerstag, 18:40**
+`,
       email: "andrea.hofmann@joando.at",
       phone: "+43 676 966 17 07",
       url: "https://www.joando.at/ENSTSPANNUNG/"
@@ -144,11 +163,13 @@ Eigene Interessen: Meine Familie, Menschen, Tiere, Natur, Kulturen, Humor
       "practitioner-portrait": "images/portrait-nicole-frank.jpg",
       subtitle: "Sozialpädagogin, Yogalehrerin, Angehende Psychotherapeutin",
       text: `
-**Dientags von 18.30 - 20 Uhr**, für Anfänger und Fortgeschrittene.
+### Yoga mit Nicole Frank
 
 Präsent, kraftvoll und entspannt im Alltag sein.
 Mithilfe unterschiedlicher Techniken (Körperliche Haltungen und Bewegungsabläufe, Atem-, Wahrnehmungs-, Aufmerksamkeits- und Achtsamkeitsübungen) aus verschiedenen Yogastilen inspiriert bringen wir Balance in unser System. Durch bewussten Umgang mit der Atmung in Kombination mit achtsamen Bewegungen kann der Geist im Hier und Jetzt zur Ruhe kommen. Der Körper wird gekräftigt, gedehnt und mobilisiert.
 Eine *unverbindliche Schnuppereinheit um 10 €* ist nach Anmeldung jederzeit möglich.
+
+**Dientags von 18.30 - 20 Uhr**, für Anfänger und Fortgeschrittene.
 
 **Die regulären Preise für den Gruppenunterricht:**
 
